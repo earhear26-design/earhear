@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Articles & News | EarHear Clinics</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:wght@400;600;700&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #FF7A3D;
+            --primary-dark: #E65100;
+            --accent: #4FC3F7;
+            --accent-light: #B3E5FC;
+            --text-dark: #1a1a2e;
+            --text-light: #6B7280;
+            --bg-cream: #F0F9FF;
+            --bg-white: #FFFFFF;
+            --border-soft: #E0F2FE;
+        }
+        
+        [data-theme="dark"] {
+            --primary: #FF8C52;
+            --primary-dark: #FFA366;
+            --accent: #4FC3F7;
+            --accent-light: #2196F3;
+            --text-dark: #F3F4F6;
+            --text-light: #D1D5DB;
+            --bg-cream: #000000;
+            --bg-white: #1a1a1a;
+            --border-soft: #333333;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'DM Sans', sans-serif;
+            color: var(--text-dark);
+            background: var(--bg-cream);
+            line-height: 1.7;
+            transition: background 0.3s ease, color 0.3s ease;
+        }
+        
+        .nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-soft);
+            transition: all 0.3s ease;
+        }
+        
+        .nav.scrolled {
+            background: rgba(255, 255, 255, 0.65);
+            backdrop-filter: blur(30px);
+            -webkit-backdrop-filter: blur(30px);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+        
+        [data-theme="dark"] .nav {
+            background: rgba(26, 26, 26, 0.5);
+        }
+        
+        [data-theme="dark"] .nav.scrolled {
+            background: rgba(26, 26, 26, 0.65);
+        }
+        
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.2rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-decoration: none;
+        }
+        
+        .logo-ear {
+            color: var(--accent);
+        }
+        
+        .logo-hear {
+            color: var(--primary);
+        }
+        
+        .back-btn {
+            background: var(--primary);
+            color: white;
+            padding: 0.7rem 1.5rem;
+            border-radius: 30px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .back-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        
+        .theme-toggle {
+            background: var(--bg-cream);
+            border: 2px solid var(--border-soft);
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+            margin-left: 1rem;
+        }
+        
+        .theme-toggle:hover {
+            transform: scale(1.1);
+            border-color: var(--accent);
+        }
+        
+        .hero-section {
+            margin-top: 80px;
+            padding: 4rem 2rem;
+            text-align: center;
+            background: linear-gradient(135deg, rgba(240, 249, 255, 0.95) 0%, rgba(224, 242, 254, 0.95) 100%);
+        }
+        
+        [data-theme="dark"] .hero-section {
+            background: linear-gradient(135deg, rgba(0, 0, 0, 0.95) 0%, rgba(26, 26, 26, 0.95) 100%);
+        }
+        
+        .hero-section h1 {
+            font-family: 'Crimson Pro', serif;
+            font-size: 3rem;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+        
+        .hero-section p {
+            font-size: 1.2rem;
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .articles-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+        
+        .article-card {
+            background: var(--bg-white);
+            border-radius: 0;
+            overflow: hidden;
+            border: none;
+            transition: all 0.3s;
+            cursor: pointer;
+            display: block;
+            padding: 0;
+        }
+        
+        .article-card:hover {
+            background: linear-gradient(135deg, #FF7A3D, #4FC3F7);
+            padding: 5px;
+            transform: scale(1.02);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            z-index: 10;
+        }
+        
+        .article-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .article-content {
+            padding: 2rem;
+        }
+        
+        .article-date {
+            color: var(--accent);
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .article-title {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.6rem;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+        }
+        
+        .article-excerpt {
+            color: var(--text-light);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+        
+        .read-more {
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .section-title {
+            font-family: 'Crimson Pro', serif;
+            font-size: 2.5rem;
+            color: var(--text-dark);
+            text-align: center;
+            margin: 4rem 0 2rem;
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 2rem;
+        }
+        
+        .gallery-item {
+            background: var(--bg-white);
+            border-radius: 0;
+            overflow: hidden;
+            border: none;
+            transition: all 0.3s;
+            cursor: pointer;
+            padding: 0;
+        }
+        
+        .gallery-item:hover {
+            background: linear-gradient(135deg, #FF7A3D, #4FC3F7);
+            padding: 5px;
+            transform: scale(1.02);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        
+        .why-choose-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .why-choose-item {
+            background: var(--bg-white);
+            padding: 2rem;
+            border-radius: 15px;
+            border: 1px solid var(--border-soft);
+            transition: all 0.3s;
+            text-align: center;
+        }
+        
+        .why-choose-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(79, 195, 247, 0.2);
+            border-color: var(--accent);
+        }
+        
+        .why-choose-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .why-choose-item h3 {
+            font-family: 'Crimson Pro', serif;
+            font-size: 1.3rem;
+            color: var(--text-dark);
+            margin-bottom: 0.5rem;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+            
+            .articles-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="nav-container">
+            <a href="healthcare-website.html" class="logo">
+                <img src="images/earhear-logo.png" alt="EarHear Clinic Logo" style="height: 100px; width: auto;" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                <span class="logo-text" style="display: none;">
+                    <span class="logo-ear">Ear</span><span class="logo-hear">Hear</span>
+                </span>
+            </a>
+            <ul class="nav-links" style="display: flex; gap: 2.5rem; list-style: none; align-items: center;">
+                <li class="nav-item" style="position: relative;">
+                    <a href="services.html" style="text-decoration: none; color: var(--text-dark); font-weight: 500;">Services</a>
+                </li>
+                <li class="nav-item" style="position: relative;">
+                    <a href="healthcare-website.html#products" style="text-decoration: none; color: var(--text-dark); font-weight: 500;">Products</a>
+                </li>
+                <li><a href="healthcare-website.html#about" style="text-decoration: none; color: var(--text-dark); font-weight: 500;">About</a></li>
+                <li><a href="healthcare-website.html#locations" style="text-decoration: none; color: var(--text-dark); font-weight: 500;">Locations</a></li>
+                <li><a href="healthcare-website.html#testimonials" style="text-decoration: none; color: var(--text-dark); font-weight: 500;">Testimonials</a></li>
+                <li><button class="back-btn" onclick="window.location.href='healthcare-website.html'">Book Appointment</button></li>
+            </ul>
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
+                    <span id="themeIcon">🌙</span>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="hero-section">
+        <h1>Articles & News</h1>
+        <p>Stay informed with the latest insights on hearing health, technology, and patient care</p>
+        <a href="healthcare-website.html" style="display: inline-block; margin-top: 1.5rem; background: var(--primary); color: white; padding: 0.8rem 2rem; border-radius: 30px; text-decoration: none; font-weight: 600; transition: all 0.3s;" onmouseover="this.style.background='var(--primary-dark)'; this.style.transform='translateY(-2px)'" onmouseout="this.style.background='var(--primary)'; this.style.transform='translateY(0)'">← Back to Home</a>
+    </div>
+
+    <div class="articles-container">
+        <div class="articles-grid">
+            <div class="article-card">
+                <img src="images/news.jpg" alt="News" class="article-image">
+            </div>
+            <div class="article-card">
+                <img src="images/news/WhatsApp Image 2026-03-05 at 15.12.36.jpeg" alt="News" class="article-image">
+            </div>
+            <div class="article-card">
+                <img src="images/news/WhatsApp Image 2026-03-05 at 15.12.36 (1).jpeg" alt="News" class="article-image">
+            </div>
+            <div class="article-card">
+                <img src="images/news/WhatsApp Image 2026-03-05 at 15.12.36 (2).jpeg" alt="News" class="article-image">
+            </div>
+            <div class="article-card">
+                <img src="images/news/WhatsApp Image 2026-03-05 at 15.12.37.jpeg" alt="News" class="article-image">
+            </div>
+            <div class="article-card">
+                <img src="images/news/WhatsApp Image 2026-03-05 at 15.12.37 (1).jpeg" alt="News" class="article-image">
+            </div>
+            <div class="article-card">
+                <img src="images/news/WhatsApp Image 2026-03-05 at 15.12.37 (2).jpeg" alt="News" class="article-image">
+            </div>
+            <div class="article-card" onclick="window.open('https://youtu.be/3bk___oK784?si=euT4pYXmdJu239nl', '_blank')" style="position: relative; background: #000;">
+                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/3bk___oK784" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="pointer-events: none;"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <div class="articles-container">
+        <h2 class="section-title">Photo Gallery</h2>
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="images/gallery1.jpg" alt="Gallery Photo 1" onerror="this.src='https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600&h=400&fit=crop'">
+            </div>
+            <div class="gallery-item">
+                <img src="images/gallery2.jpg" alt="Gallery Photo 2" onerror="this.src='https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=600&h=400&fit=crop'">
+            </div>
+            <div class="gallery-item">
+                <img src="images/gallery3.jpg" alt="Gallery Photo 3" onerror="this.src='https://images.unsplash.com/photo-1527613426441-4da17471b66d?w=600&h=400&fit=crop'">
+            </div>
+        </div>
+    </div>
+
+    <div class="articles-container">
+        <h2 class="section-title">Why Choose Us?</h2>
+        <div class="why-choose-grid">
+            <div class="why-choose-item">
+                <div class="why-choose-icon">👨‍⚕️</div>
+                <h3>Experienced Specialists</h3>
+            </div>
+            <div class="why-choose-item">
+                <div class="why-choose-icon">👶</div>
+                <h3>Child-Friendly Environment</h3>
+            </div>
+            <div class="why-choose-item">
+                <div class="why-choose-icon">🔬</div>
+                <h3>Latest Diagnostic Audiological Equipment</h3>
+            </div>
+            <div class="why-choose-item">
+                <div class="why-choose-icon">📋</div>
+                <h3>Personalized Therapy Plans</h3>
+            </div>
+            <div class="why-choose-item">
+                <div class="why-choose-icon">❤️</div>
+                <h3>Ethical & Affordable Care</h3>
+            </div>
+            <div class="why-choose-item">
+                <div class="why-choose-icon">💻</div>
+                <h3>Online Services Available</h3>
+            </div>
+            <div class="why-choose-item">
+                <div class="why-choose-icon">🏠</div>
+                <h3>Home Visit Services Available</h3>
+            </div>
+            <div class="why-choose-item">
+                <div class="why-choose-icon">🏥</div>
+                <h3>All Rehabilitation Services Available in One Roof</h3>
+            </div>
+        </div>
+    </div>
+
+    <footer style="background: var(--primary-dark); color: white; padding: 4rem 2rem 2rem; transition: background 0.3s ease;">
+        <div style="max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin-bottom: 3rem;">
+            <div>
+                <h3 style="font-family: 'Crimson Pro', serif; font-size: 1.4rem; margin-bottom: 1.5rem; color: var(--accent);"><span style="color: var(--accent);">Ear</span><span style="color: var(--primary);">Hear</span></h3>
+                <p style="color: rgba(255,255,255,0.8); margin-bottom: 1rem;">Trusted hearing care since 2026. Helping 500+ patients in Kanpur reconnect with the world.</p>
+            </div>
+            <div>
+                <h3 style="font-family: 'Crimson Pro', serif; font-size: 1.4rem; margin-bottom: 1.5rem; color: var(--accent);">Quick Links</h3>
+                <ul style="list-style: none;">
+                    <li style="margin-bottom: 0.8rem;"><a href="articles.html" style="color: rgba(255,255,255,0.8); text-decoration: none;">About Us</a></li>
+                    <li style="margin-bottom: 0.8rem;"><a href="services.html" style="color: rgba(255,255,255,0.8); text-decoration: none;">Services</a></li>
+                    <li style="margin-bottom: 0.8rem;"><a href="healthcare-website.html#products" style="color: rgba(255,255,255,0.8); text-decoration: none;">Products</a></li>
+                </ul>
+            </div>
+            <div>
+                <h3 style="font-family: 'Crimson Pro', serif; font-size: 1.4rem; margin-bottom: 1.5rem; color: var(--accent);">Contact Us</h3>
+                <p style="color: rgba(255,255,255,0.8); margin-bottom: 0.8rem;">📍 Block 9, Chawla Market, Kanpur</p>
+                <p style="color: rgba(255,255,255,0.8); margin-bottom: 0.8rem;">📞 <a href="tel:+918881117113" style="color: rgba(255,255,255,0.8);">8881117113</a></p>
+                <p style="color: rgba(255,255,255,0.8);">✉️ <a href="mailto:earhear26@gmail.com" style="color: rgba(255,255,255,0.8);">earhear26@gmail.com</a></p>
+            </div>
+        </div>
+        <div style="max-width: 1400px; margin: 0 auto; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); text-align: center;">
+            <p style="color: rgba(255,255,255,0.7);">© 2024 EarHear Clinics. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            
+            document.getElementById('themeIcon').textContent = newTheme === 'dark' ? '☀️' : '🌙';
+        }
+        
+        (function() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            document.getElementById('themeIcon').textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+        })();
+        
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('.nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>
