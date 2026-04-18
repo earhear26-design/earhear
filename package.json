@@ -1,0 +1,15 @@
+{
+  "name": "earhear",
+  "version": "1.0.0",
+  "description": "EarHear Clinics - Expert Hearing Care Website",
+  "scripts": {
+    "dev": "npx serve .",
+    "build": "echo 'Static HTML site - no build required'"
+  },
+  "keywords": ["healthcare", "hearing-care", "static-site"],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@vercel/speed-insights": "^1.0.0"
+  }
+}
