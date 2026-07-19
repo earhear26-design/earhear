@@ -428,7 +428,7 @@
                 <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
                     <span id="themeIcon">🌙</span>
                 </button>
-                <button class="hamburger" onclick="openMobileNav()" aria-label="Open menu">
+                <button class="hamburger" onclick="toggleMobileNav()" aria-label="Toggle menu">
                     <span></span><span></span><span></span>
                 </button>
             </div>
@@ -484,12 +484,28 @@
         <h2 class="section-title">Photo Gallery</h2>
         <div class="gallery-grid">
             <div class="gallery-item">
-                <img src="images/Galery 1.jpeg" alt="Galery 1"
+                <img src="images/Galery 1.jpeg" alt="Gallery 1">
             </div>
             <div class="gallery-item">
-                <img src="images/Gallery 2.jpeg" alt="Gallery 2" 
+                <img src="images/Gallery 2.jpeg" alt="Gallery 2">
+            </div>
             <div class="gallery-item">
-                <img src="images/Gallery 3.jpeg" alt="Gallery 3"
+                <img src="images/Gallery 3.jpeg" alt="Gallery 3">
+            </div>
+            <div class="gallery-item">
+                <img src="images/Gallery 4.jpeg" alt="Gallery 4">
+            </div>
+            <div class="gallery-item">
+                <img src="images/Gallery 5.jpeg" alt="Gallery 5">
+            </div>
+            <div class="gallery-item">
+                <img src="images/Front.jpeg" alt="Gallery 6">
+            </div>
+            <div class="gallery-item">
+                <img src="images/Modern.PNG" alt="Gallery 7">
+            </div>
+            <div class="gallery-item">
+                <img src="images/Untitled.jpg" alt="Gallery 8">
             </div>
         </div>
     </div>
@@ -559,9 +575,10 @@
     </footer>
 
     <script>
-        function openMobileNav() {
-            document.getElementById('mobileNav').classList.add('open');
-            document.body.style.overflow = 'hidden';
+        function toggleMobileNav() {
+            const nav = document.getElementById('mobileNav');
+            const isOpen = nav.classList.toggle('open');
+            document.body.style.overflow = isOpen ? 'hidden' : '';
         }
         function closeMobileNav() {
             document.getElementById('mobileNav').classList.remove('open');
