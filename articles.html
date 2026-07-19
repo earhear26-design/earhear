@@ -50,36 +50,37 @@
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(255, 255, 255, 0.5);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.82);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
             z-index: 1000;
             border-bottom: 1px solid var(--border-soft);
             transition: all 0.3s ease;
         }
         
         .nav.scrolled {
-            background: rgba(255, 255, 255, 0.65);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
         }
         
         [data-theme="dark"] .nav {
-            background: rgba(26, 26, 26, 0.5);
+            background: rgba(26, 26, 26, 0.88);
         }
         
         [data-theme="dark"] .nav.scrolled {
-            background: rgba(26, 26, 26, 0.65);
+            background: rgba(26, 26, 26, 0.95);
         }
         
         .nav-container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 1.2rem 2rem;
+            padding: 0.8rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 1rem;
         }
         
         .logo {
@@ -87,27 +88,45 @@
             font-size: 1.8rem;
             font-weight: 700;
             text-decoration: none;
+            flex-shrink: 0;
         }
         
-        .logo-ear {
-            color: var(--accent);
+        .logo img {
+            height: clamp(44px, 5vw, 60px);
+            width: auto;
         }
         
-        .logo-hear {
-            color: var(--primary);
+        .logo-ear { color: var(--accent); }
+        .logo-hear { color: var(--primary); }
+        
+        .nav-links {
+            display: flex;
+            gap: clamp(0.8rem, 1.5vw, 2.5rem);
+            list-style: none;
+            align-items: center;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: clamp(0.8rem, 1.1vw, 0.95rem);
+            white-space: nowrap;
         }
         
         .back-btn {
             background: var(--primary);
             color: white;
-            padding: 0.7rem 1.5rem;
+            padding: clamp(0.4rem, 0.8vw, 0.7rem) clamp(0.8rem, 1.5vw, 1.5rem);
             border-radius: 30px;
             border: none;
             font-weight: 600;
+            font-size: clamp(0.75rem, 1vw, 0.9rem);
             cursor: pointer;
             transition: all 0.3s;
             text-decoration: none;
             display: inline-block;
+            white-space: nowrap;
         }
         
         .back-btn:hover {
@@ -118,16 +137,16 @@
         .theme-toggle {
             background: var(--bg-cream);
             border: 2px solid var(--border-soft);
-            width: 45px;
-            height: 45px;
+            width: clamp(32px, 3.5vw, 40px);
+            height: clamp(32px, 3.5vw, 40px);
             border-radius: 50%;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.2rem;
+            font-size: clamp(0.9rem, 1.2vw, 1.1rem);
             transition: all 0.3s;
-            margin-left: 1rem;
+            flex-shrink: 0;
         }
         
         .theme-toggle:hover {
@@ -135,9 +154,62 @@
             border-color: var(--accent);
         }
         
+        /* Hamburger */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 4px;
+            flex-shrink: 0;
+        }
+        .hamburger span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--text-dark);
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+        
+        /* Mobile nav drawer */
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-white);
+            z-index: 999;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+        }
+        .mobile-nav.open { display: flex; }
+        .mobile-nav a {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            text-decoration: none;
+        }
+        .mobile-nav-close {
+            position: absolute;
+            top: 1.2rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--text-dark);
+        }
+        
         .hero-section {
-            margin-top: 80px;
-            padding: 4rem 2rem;
+            margin-top: 60px;
+            padding: clamp(2rem, 5vw, 4rem) clamp(1rem, 4vw, 2rem);
             text-align: center;
             background: linear-gradient(135deg, rgba(240, 249, 255, 0.95) 0%, rgba(224, 242, 254, 0.95) 100%);
         }
@@ -148,13 +220,13 @@
         
         .hero-section h1 {
             font-family: 'Crimson Pro', serif;
-            font-size: 3rem;
+            font-size: clamp(1.8rem, 5vw, 3rem);
             color: var(--text-dark);
             margin-bottom: 1rem;
         }
         
         .hero-section p {
-            font-size: 1.2rem;
+            font-size: clamp(0.95rem, 2vw, 1.2rem);
             color: var(--text-light);
             max-width: 700px;
             margin: 0 auto;
@@ -163,7 +235,7 @@
         .articles-container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 2rem;
+            padding: clamp(1rem, 3vw, 2rem);
         }
         
         .articles-grid {
@@ -181,6 +253,7 @@
             cursor: pointer;
             display: block;
             padding: 0;
+            aspect-ratio: 4/3;
         }
         
         .article-card:hover {
@@ -196,6 +269,16 @@
             height: 100%;
             object-fit: cover;
             display: block;
+        }
+        
+        .article-card-video {
+            aspect-ratio: 16/9;
+        }
+        .article-card-video iframe {
+            width: 100%;
+            height: 100%;
+            display: block;
+            pointer-events: none;
         }
         
         .article-content {
@@ -233,10 +316,10 @@
         
         .section-title {
             font-family: 'Crimson Pro', serif;
-            font-size: 2.5rem;
+            font-size: clamp(1.6rem, 4vw, 2.5rem);
             color: var(--text-dark);
             text-align: center;
-            margin: 4rem 0 2rem;
+            margin: clamp(2rem, 5vw, 4rem) 0 2rem;
         }
         
         .gallery-grid {
@@ -254,6 +337,7 @@
             transition: all 0.3s;
             cursor: pointer;
             padding: 0;
+            aspect-ratio: 4/3;
         }
         
         .gallery-item:hover {
@@ -272,8 +356,8 @@
         
         .why-choose-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+            gap: clamp(1rem, 2vw, 2rem);
             margin-top: 2rem;
         }
         
@@ -304,14 +388,22 @@
             margin-bottom: 0.5rem;
         }
         
+        @media (max-width: 968px) {
+            .nav-links { display: none; }
+            .hamburger { display: flex; }
+        }
+        
         @media (max-width: 768px) {
-            .hero-section h1 {
-                font-size: 2rem;
-            }
-            
-            .articles-grid {
+            .articles-grid,
+            .gallery-grid {
                 grid-template-columns: 1fr;
             }
+        }
+        
+        @media (max-width: 480px) {
+            .nav-container { padding: 0.6rem 1rem; }
+            .articles-container { padding: 0.75rem; }
+            .why-choose-item { padding: 1.25rem; }
         }
     </style>
 </head>
@@ -319,30 +411,39 @@
     <nav class="nav">
         <div class="nav-container">
             <a href="healthcare-website.html" class="logo">
-                <img src="images/earhear-logo.png" alt="EarHear Clinic Logo" style="height: 100px; width: auto;" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                <img src="images/earhear-logo.png" alt="EarHear Clinic Logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
                 <span class="logo-text" style="display: none;">
                     <span class="logo-ear">Ear</span><span class="logo-hear">Hear</span>
                 </span>
             </a>
-            <ul class="nav-links" style="display: flex; gap: 2.5rem; list-style: none; align-items: center;">
-                <li class="nav-item" style="position: relative;">
-                    <a href="services.html" style="text-decoration: none; color: var(--text-dark); font-weight: 500;">Services</a>
-                </li>
-                <li class="nav-item" style="position: relative;">
-                    <a href="healthcare-website.html#products" style="text-decoration: none; color: var(--text-dark); font-weight: 500;">Products</a>
-                </li>
-                <li><a href="healthcare-website.html#about" style="text-decoration: none; color: var(--text-dark); font-weight: 500;">About</a></li>
-                <li><a href="healthcare-website.html#locations" style="text-decoration: none; color: var(--text-dark); font-weight: 500;">Locations</a></li>
-                <li><a href="healthcare-website.html#testimonials" style="text-decoration: none; color: var(--text-dark); font-weight: 500;">Testimonials</a></li>
-                <li><button class="back-btn" onclick="window.location.href='healthcare-website.html'">Book Appointment</button></li>
+            <ul class="nav-links">
+                <li><a href="services.html">Services</a></li>
+                <li><a href="healthcare-website.html#products">Products</a></li>
+                <li><a href="healthcare-website.html#about">About</a></li>
+                <li><a href="healthcare-website.html#locations">Locations</a></li>
+                <li><a href="healthcare-website.html#testimonials">Testimonials</a></li>
+                <li><a href="healthcare-website.html" class="back-btn">Book Appointment</a></li>
             </ul>
-            <div style="display: flex; align-items: center; gap: 1rem;">
+            <div style="display: flex; align-items: center; gap: 0.75rem;">
                 <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
                     <span id="themeIcon">🌙</span>
+                </button>
+                <button class="hamburger" onclick="openMobileNav()" aria-label="Open menu">
+                    <span></span><span></span><span></span>
                 </button>
             </div>
         </div>
     </nav>
+
+    <div class="mobile-nav" id="mobileNav">
+        <button class="mobile-nav-close" onclick="closeMobileNav()">✕</button>
+        <a href="services.html" onclick="closeMobileNav()">Services</a>
+        <a href="healthcare-website.html#products" onclick="closeMobileNav()">Products</a>
+        <a href="healthcare-website.html#about" onclick="closeMobileNav()">About</a>
+        <a href="healthcare-website.html#locations" onclick="closeMobileNav()">Locations</a>
+        <a href="healthcare-website.html#testimonials" onclick="closeMobileNav()">Testimonials</a>
+        <a href="healthcare-website.html" class="back-btn" onclick="closeMobileNav()">Book Appointment</a>
+    </div>
 
     <div class="hero-section">
         <h1>Articles & News</h1>
@@ -373,8 +474,8 @@
             <div class="article-card">
                 <img src="images/news/WhatsApp Image 2026-03-05 at 15.12.37 (2).jpeg" alt="News" class="article-image">
             </div>
-            <div class="article-card" onclick="window.open('https://youtu.be/3bk___oK784?si=euT4pYXmdJu239nl', '_blank')" style="position: relative; background: #000;">
-                <iframe width="100%" height="100%" src="https://www.youtube.com/embed/3bk___oK784" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="pointer-events: none;"></iframe>
+            <div class="article-card article-card-video" onclick="window.open('https://youtu.be/3bk___oK784?si=euT4pYXmdJu239nl', '_blank')" style="background: #000;">
+                <iframe src="https://www.youtube.com/embed/3bk___oK784" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
             </div>
         </div>
     </div>
@@ -383,13 +484,12 @@
         <h2 class="section-title">Photo Gallery</h2>
         <div class="gallery-grid">
             <div class="gallery-item">
-                <img src="images/gallery1.jpg" alt="Gallery Photo 1" onerror="this.src='https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600&h=400&fit=crop'">
+                <img src="images/Galery 1.jpeg" alt="Galery 1"
             </div>
             <div class="gallery-item">
-                <img src="images/gallery2.jpg" alt="Gallery Photo 2" onerror="this.src='https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?w=600&h=400&fit=crop'">
-            </div>
+                <img src="images/Gallery 2.jpeg" alt="Gallery 2" 
             <div class="gallery-item">
-                <img src="images/gallery3.jpg" alt="Gallery Photo 3" onerror="this.src='https://images.unsplash.com/photo-1527613426441-4da17471b66d?w=600&h=400&fit=crop'">
+                <img src="images/Gallery 3.jpeg" alt="Gallery 3"
             </div>
         </div>
     </div>
@@ -432,7 +532,7 @@
         </div>
     </div>
 
-    <footer style="background: var(--primary-dark); color: white; padding: 4rem 2rem 2rem; transition: background 0.3s ease;">
+    <footer style="background: var(--primary-dark); color: white; padding: clamp(2rem, 5vw, 4rem) clamp(1rem, 4vw, 2rem) 2rem; transition: background 0.3s ease;">
         <div style="max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 3rem; margin-bottom: 3rem;">
             <div>
                 <h3 style="font-family: 'Crimson Pro', serif; font-size: 1.4rem; margin-bottom: 1.5rem; color: var(--accent);"><span style="color: var(--accent);">Ear</span><span style="color: var(--primary);">Hear</span></h3>
@@ -459,6 +559,15 @@
     </footer>
 
     <script>
+        function openMobileNav() {
+            document.getElementById('mobileNav').classList.add('open');
+            document.body.style.overflow = 'hidden';
+        }
+        function closeMobileNav() {
+            document.getElementById('mobileNav').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+        
         function toggleTheme() {
             const html = document.documentElement;
             const currentTheme = html.getAttribute('data-theme');

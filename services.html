@@ -44,42 +44,85 @@
             background: var(--bg-cream);
             line-height: 1.7;
             transition: background 0.3s ease, color 0.3s ease;
+            top: 0 !important;
+        }
+        
+        /* Google Translate Styling */
+        #google_translate_element {
+            display: inline-block;
+        }
+        
+        #google_translate_element select {
+            background: var(--bg-cream);
+            border: 2px solid var(--border-soft);
+            border-radius: 25px;
+            padding: 0.5rem 0.8rem;
+            color: var(--text-dark);
+            font-weight: 600;
+            font-size: 0.85rem;
+            cursor: pointer;
+            outline: none;
+            transition: all 0.3s;
+        }
+        
+        #google_translate_element select:hover {
+            border-color: var(--accent);
+        }
+        
+        .goog-te-gadget {
+            color: transparent !important;
+            font-size: 0 !important;
+        }
+        
+        .goog-te-gadget img {
+            display: none !important;
+        }
+        
+        .goog-te-gadget-simple {
+            background: transparent !important;
+            border: none !important;
+            padding: 0 !important;
+        }
+        
+        .goog-te-banner-frame {
+            display: none !important;
         }
         
         .nav {
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(255, 255, 255, 0.5);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.82);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
             z-index: 1000;
             border-bottom: 1px solid var(--border-soft);
             transition: all 0.3s ease;
         }
         
         .nav.scrolled {
-            background: rgba(255, 255, 255, 0.65);
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
         }
         
         [data-theme="dark"] .nav {
-            background: rgba(26, 26, 26, 0.5);
+            background: rgba(26, 26, 26, 0.88);
         }
         
         [data-theme="dark"] .nav.scrolled {
-            background: rgba(26, 26, 26, 0.65);
+            background: rgba(26, 26, 26, 0.95);
         }
         
         .nav-container {
             max-width: 1400px;
             margin: 0 auto;
-            padding: 1.2rem 2rem;
+            padding: 0.8rem 2rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 1rem;
         }
         
         .logo {
@@ -87,37 +130,128 @@
             font-size: 1.8rem;
             font-weight: 700;
             text-decoration: none;
+            flex-shrink: 0;
+        }
+
+        .logo img {
+            height: clamp(44px, 5vw, 60px);
+            width: auto;
         }
         
-        .logo-ear {
-            color: var(--accent);
+        .logo-ear { color: var(--accent); }
+        .logo-hear { color: var(--primary); }
+
+        .nav-links {
+            display: flex;
+            gap: clamp(0.8rem, 1.5vw, 2.5rem);
+            list-style: none;
+            align-items: center;
         }
-        
-        .logo-hear {
-            color: var(--primary);
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: clamp(0.8rem, 1.1vw, 0.95rem);
+            white-space: nowrap;
         }
         
         .back-btn {
             background: var(--primary);
             color: white;
-            padding: 0.7rem 1.5rem;
+            padding: clamp(0.4rem, 0.8vw, 0.7rem) clamp(0.8rem, 1.5vw, 1.5rem);
             border-radius: 30px;
             border: none;
             font-weight: 600;
+            font-size: clamp(0.75rem, 1vw, 0.9rem);
             cursor: pointer;
             transition: all 0.3s;
             text-decoration: none;
             display: inline-block;
+            white-space: nowrap;
         }
         
         .back-btn:hover {
             background: var(--primary-dark);
             transform: translateY(-2px);
         }
+
+        .theme-toggle {
+            background: var(--bg-cream);
+            border: 2px solid var(--border-soft);
+            width: clamp(32px, 3.5vw, 40px);
+            height: clamp(32px, 3.5vw, 40px);
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: clamp(0.9rem, 1.2vw, 1.1rem);
+            transition: all 0.3s;
+            flex-shrink: 0;
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+            border-color: var(--accent);
+        }
+
+        /* Hamburger */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 4px;
+            flex-shrink: 0;
+        }
+        .hamburger span {
+            display: block;
+            width: 24px;
+            height: 2px;
+            background: var(--text-dark);
+            border-radius: 2px;
+            transition: all 0.3s;
+        }
+
+        /* Mobile nav drawer */
+        .mobile-nav {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg-white);
+            z-index: 999;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+        }
+        .mobile-nav.open { display: flex; }
+        .mobile-nav a {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            text-decoration: none;
+        }
+        .mobile-nav-close {
+            position: absolute;
+            top: 1.2rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--text-dark);
+        }
         
         .hero-section {
-            margin-top: 80px;
-            padding: 4rem 2rem;
+            margin-top: 60px;
+            padding: clamp(2rem, 5vw, 4rem) clamp(1rem, 4vw, 2rem);
             text-align: center;
             background: linear-gradient(135deg, rgba(240, 249, 255, 0.95) 0%, rgba(224, 242, 254, 0.95) 100%);
         }
@@ -128,13 +262,13 @@
         
         .hero-section h1 {
             font-family: 'Crimson Pro', serif;
-            font-size: 3rem;
+            font-size: clamp(1.8rem, 5vw, 3rem);
             color: var(--text-dark);
             margin-bottom: 1rem;
         }
         
         .hero-section p {
-            font-size: 1.2rem;
+            font-size: clamp(0.95rem, 2vw, 1.2rem);
             color: var(--text-light);
             max-width: 700px;
             margin: 0 auto;
@@ -143,7 +277,7 @@
         .services-container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 4rem 2rem;
+            padding: clamp(2rem, 5vw, 4rem) clamp(1rem, 4vw, 2rem);
         }
         
         .service-category {
@@ -152,7 +286,7 @@
         
         .category-title {
             font-family: 'Crimson Pro', serif;
-            font-size: 2.5rem;
+            font-size: clamp(1.6rem, 4vw, 2.5rem);
             color: var(--primary);
             margin-bottom: 2rem;
             text-align: center;
@@ -160,8 +294,8 @@
         
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
+            grid-template-columns: repeat(auto-fit, minmax(min(300px, 100%), 1fr));
+            gap: clamp(1rem, 2vw, 2rem);
         }
         
         .service-item {
@@ -190,14 +324,15 @@
             line-height: 1.7;
         }
         
-        @media (max-width: 768px) {
-            .hero-section h1 {
-                font-size: 2rem;
-            }
-            
-            .services-grid {
-                grid-template-columns: 1fr;
-            }
+        @media (max-width: 968px) {
+            .nav-links { display: none; }
+            .hamburger { display: flex; }
+        }
+
+        @media (max-width: 480px) {
+            .nav-container { padding: 0.6rem 1rem; }
+            .services-container { padding: 1.5rem 0.75rem; }
+            .service-item { padding: 1.25rem; }
         }
     </style>
 </head>
@@ -205,30 +340,40 @@
     <nav class="nav">
         <div class="nav-container">
             <a href="healthcare-website.html" class="logo">
-                <img src="images/earhear-logo.png" alt="EarHear Clinic Logo" style="height: 100px; width: auto;" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
+                <img src="images/earhear-logo.png" alt="EarHear Clinic Logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline';">
                 <span class="logo-text" style="display: none;">
                     <span class="logo-ear">Ear</span><span class="logo-hear">Hear</span>
                 </span>
             </a>
-            <ul class="nav-links" style="display: flex; gap: 2.5rem; list-style: none; align-items: center;">
-                <li class="nav-item" style="position: relative;">
-                    <a href="services.html" style="text-decoration: none; color: var(--text-dark); font-weight: 500;">Services</a>
-                </li>
-                <li class="nav-item" style="position: relative;">
-                    <a href="healthcare-website.html#products" style="text-decoration: none; color: var(--text-dark); font-weight: 500;">Products</a>
-                </li>
-                <li><a href="healthcare-website.html#about" style="text-decoration: none; color: var(--text-dark); font-weight: 500;">About</a></li>
-                <li><a href="healthcare-website.html#locations" style="text-decoration: none; color: var(--text-dark); font-weight: 500;">Locations</a></li>
-                <li><a href="healthcare-website.html#testimonials" style="text-decoration: none; color: var(--text-dark); font-weight: 500;">Testimonials</a></li>
-                <li><button class="back-btn" onclick="window.location.href='healthcare-website.html'">Book Appointment</button></li>
+            <ul class="nav-links">
+                <li><a href="services.html">Services</a></li>
+                <li><a href="healthcare-website.html#products">Products</a></li>
+                <li><a href="healthcare-website.html#about">About</a></li>
+                <li><a href="healthcare-website.html#locations">Locations</a></li>
+                <li><a href="healthcare-website.html#testimonials">Testimonials</a></li>
+                <li><a href="healthcare-website.html" class="back-btn">Book Appointment</a></li>
             </ul>
-            <div style="display: flex; align-items: center; gap: 1rem;">
-                <button class="theme-toggle" style="background: var(--bg-cream); border: 2px solid var(--border-soft); width: 45px; height: 45px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; transition: all 0.3s;" onclick="toggleTheme()" aria-label="Toggle theme">
+            <div style="display: flex; align-items: center; gap: 0.75rem;">
+                <div id="google_translate_element"></div>
+                <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
                     <span id="themeIcon">🌙</span>
+                </button>
+                <button class="hamburger" onclick="toggleMobileNav()" aria-label="Toggle menu">
+                    <span></span><span></span><span></span>
                 </button>
             </div>
         </div>
     </nav>
+
+    <div class="mobile-nav" id="mobileNav">
+        <button class="mobile-nav-close" onclick="closeMobileNav()">✕</button>
+        <a href="services.html" onclick="closeMobileNav()">Services</a>
+        <a href="healthcare-website.html#products" onclick="closeMobileNav()">Products</a>
+        <a href="healthcare-website.html#about" onclick="closeMobileNav()">About</a>
+        <a href="healthcare-website.html#locations" onclick="closeMobileNav()">Locations</a>
+        <a href="healthcare-website.html#testimonials" onclick="closeMobileNav()">Testimonials</a>
+        <a href="healthcare-website.html" class="back-btn" onclick="closeMobileNav()">Book Appointment</a>
+    </div>
 
     <div class="hero-section">
         <h1>Our Services</h1>
@@ -241,44 +386,52 @@
             <h2 class="category-title">Audiology Services</h2>
             <div class="services-grid">
                 <div class="service-item" id="pta">
-                    <img src="images/Untitled.jpg" alt="PTA Test" style="width: 100%; border-radius: 10px; margin-bottom: 1rem; object-fit: cover;">
+                    <img src="images/Untitled.jpg" alt="PTA Test" style="width: 100%; height: 200px; border-radius: 10px; margin-bottom: 1rem; object-fit: cover;">
                     <h3>PTA (Pure Tone Audiometry)</h3>
                     <p>Comprehensive hearing assessment to determine the softest sounds you can hear at different frequencies.</p>
                 </div>
                 <div class="service-item" id="impedance">
-                    <img src="images/untitled2.jpg" alt="Impedance Audiometry" style="width: 100%; border-radius: 10px; margin-bottom: 1rem; object-fit: cover;">
+                    <img src="images/untitled2.jpg" alt="Impedance Audiometry" style="width: 100%; height: 200px; border-radius: 10px; margin-bottom: 1rem; object-fit: cover;">
                     <h3>Impedance Audiometry</h3>
                     <p>Tests middle ear function and identifies issues like fluid buildup or eardrum problems.</p>
                 </div>
-                <div class="service-item">
+                <div class="service-item" id="oae">
+                    <img src="https://images.unsplash.com/photo-1581595220892-b0739db3ba8c?w=600&h=400&fit=crop" alt="OAE Test" style="width: 100%; height: 200px; border-radius: 10px; margin-bottom: 1rem; object-fit: cover;">
                     <h3>OAE (Otoacoustic Emissions)</h3>
                     <p>Quick screening test to check inner ear function, commonly used for newborn hearing screening.</p>
                 </div>
-                <div class="service-item">
+                <div class="service-item" id="bera">
+                    <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=600&h=400&fit=crop" alt="BERA Test" style="width: 100%; height: 200px; border-radius: 10px; margin-bottom: 1rem; object-fit: cover;">
                     <h3>BERA (Brainstem Evoked Response Audiometry)</h3>
                     <p>Advanced test to evaluate hearing pathway from ear to brain, ideal for infants and difficult-to-test patients.</p>
                 </div>
-                <div class="service-item">
+                <div class="service-item" id="hearing-aid">
+                    <img src="https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?w=600&h=400&fit=crop" alt="Hearing Aid Fitting" style="width: 100%; height: 200px; border-radius: 10px; margin-bottom: 1rem; object-fit: cover;">
                     <h3>Hearing Aid Fitting</h3>
                     <p>Professional fitting and customization of hearing aids tailored to your specific hearing loss and lifestyle needs.</p>
                 </div>
-                <div class="service-item">
+                <div class="service-item" id="programming">
+                    <img src="https://images.unsplash.com/photo-1581093458791-9f3c3900df4b?w=600&h=400&fit=crop" alt="Hearing Aid Programming" style="width: 100%; height: 200px; border-radius: 10px; margin-bottom: 1rem; object-fit: cover;">
                     <h3>Hearing Aid Programming</h3>
                     <p>Advanced programming and fine-tuning of digital hearing aids for optimal performance.</p>
                 </div>
-                <div class="service-item">
+                <div class="service-item" id="repair">
+                    <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=600&h=400&fit=crop" alt="Hearing Aid Repair" style="width: 100%; height: 200px; border-radius: 10px; margin-bottom: 1rem; object-fit: cover;">
                     <h3>Hearing Aid Repair & Accessories</h3>
                     <p>Complete repair services and accessories including batteries, cleaning tools, and replacement parts.</p>
                 </div>
-                <div class="service-item">
+                <div class="service-item" id="cochlear">
+                    <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=600&h=400&fit=crop" alt="Cochlear Implants" style="width: 100%; height: 200px; border-radius: 10px; margin-bottom: 1rem; object-fit: cover;">
                     <h3>Cochlear Implants</h3>
                     <p>Consultation and support for cochlear implant candidates with severe to profound hearing loss.</p>
                 </div>
-                <div class="service-item">
+                <div class="service-item" id="mapping">
+                    <img src="https://images.unsplash.com/photo-1581093804475-577d72e38aa0?w=600&h=400&fit=crop" alt="Cochlear Implant Mapping" style="width: 100%; height: 200px; border-radius: 10px; margin-bottom: 1rem; object-fit: cover;">
                     <h3>Cochlear Implant Mapping</h3>
                     <p>Professional programming and adjustment of cochlear implant processors for optimal hearing.</p>
                 </div>
-                <div class="service-item">
+                <div class="service-item" id="accessories">
+                    <img src="https://images.unsplash.com/photo-1581092918484-8313e1f718c7?w=600&h=400&fit=crop" alt="Cochlear Implant Accessories" style="width: 100%; height: 200px; border-radius: 10px; margin-bottom: 1rem; object-fit: cover;">
                     <h3>Cochlear Implant Accessories & Parts</h3>
                     <p>Complete range of cochlear implant accessories, replacement parts, and maintenance supplies.</p>
                 </div>
@@ -311,7 +464,29 @@
         </div>
     </footer>
 
+    <!-- Google Translate Script -->
+    <script type="text/javascript">
+        function googleTranslateElementInit() {
+            new google.translate.TranslateElement({
+                pageLanguage: 'en',
+                includedLanguages: 'en,hi',
+                layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+            }, 'google_translate_element');
+        }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
     <script>
+        function toggleMobileNav() {
+            const nav = document.getElementById('mobileNav');
+            const isOpen = nav.classList.toggle('open');
+            document.body.style.overflow = isOpen ? 'hidden' : '';
+        }
+        function closeMobileNav() {
+            document.getElementById('mobileNav').classList.remove('open');
+            document.body.style.overflow = '';
+        }
+
         function toggleTheme() {
             const html = document.documentElement;
             const currentTheme = html.getAttribute('data-theme');
